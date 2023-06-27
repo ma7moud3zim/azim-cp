@@ -13,9 +13,26 @@ using namespace std;
 
 void run()
 {
-    long long n; cin>>n;
-    long long ans = -1+sqrt(1+n*8) / 2;
-    cout<<ans<<'\n';
+    ll n;
+    cin>>n;
+    ll a[n+1][n+1];
+    for(int i=1; i<=n; i++)
+    for(int j=1; j<=n; j++)
+        cin>>a[i][j];
+
+    ll ans[n+1]={};
+    for(int i=1; i<=n; i++)
+    for(int j=i+1; j<=n; j++)
+    {
+        if(i==j) continue;
+        ans[i] |= a[i][j];
+        ans[j] |= a[i][j];
+    }
+    
+    for(int i=1; i<=n; i++){
+        cout<<ans[i]<<' ';
+    }
+    cout<<nl;
 }
 
 //====================
