@@ -1,107 +1,68 @@
 #include <bits/stdc++.h>
-#define _CRT_SECURE_NO_WARNINGS
-#pragma GCC optimization("Ofast")
+#include <unordered_set>
 #define ll long long
-#define nl '\n'
+#define ld long double
+#define nl << '\n'
+#define loop(n) for (long long i = 0; i < n; i++)
+#define loop2(a, n) for (long long j = a; j < n; j++)
+#define test \
+  int t;     \
+  cin >> t;  \
+  while (t--)
+#define yn cou t << (ok ? "YES" : "NO")nl;
 #define pill pair<ll, ll>
+#define pb push_back
 #define fs first
 #define sc second
-#define pb push_back
-#define db(x) cout << #x << ": \"" << x << '\"' << nl
+#define nn \
+  int n;   \
+  cin >> n;
+#define alpha cin.tie(0)->sync_with_stdio(0);
 using namespace std;
-//====================
 
-
-vector<int> constructLPS(vector<int>& pattern) {
-    int m = pattern.size();
-    vector<int> lps(m);
-    int len = 0;
-    int i = 1;
-    
-    while (i < m) {
-        if (pattern[i] == pattern[len]) {
-            len++;
-            lps[i] = len;
-            i++;
-        } else {
-            if (len != 0) {
-                len = lps[len - 1];
-            } else {
-                lps[i] = 0;
-                i++;
-            }
-        }
-    }
-    
-    return lps;
-}
-
-int countOccurrences(vector<int>& largerArray,
-            vector<int>& smallerArray) {
-    int n = largerArray.size();
-    int m = smallerArray.size();
-
-    vector<int> lps = constructLPS(smallerArray);
-    
-    int i = 0, j = 0;      
-    int count = 0;
-    
-    while (i < n) {
-        if (largerArray[i] == smallerArray[j]) {
-            i++;
-            j++;
-            
-            if (j == m) {
-                count++;
-                j = lps[j - 1];
-            }
-        } else {
-            if (j != 0) {
-                j = lps[j - 1];
-            } else {
-                i++;
-            }
-        }
-    }
-    
-    return count;
-}
-
-void run()
+int solve()
 {
-    ll m,n;
-    cin>>m>>n;
-    ll a[m],b[n];
-    vector<int> ad(m-1),bd(n-1);
-    if(m==1){
-        cout<<n<<nl;
-        return;
+  ll n, k, x;
+  cin >> n >> k >> x;
+  if ((k == 2 && n % 2 == 1 && x == 1) ||( k == 1 && x == 1))
+    cout << "NO\n";
+  else if (k >=2 && n % 2 == 0&&x!=2)
+  {
+    cout << "yes\n";
+    cout << n / 2 nl;
+    loop(n / 2)cout << 2 << " ";
+    cout nl;
+  }
+  else if (x != 1)
+  {
+    cout << "yes\n";
+    cout << n nl;
+    loop(n) cout << 1 << " ";
+    cout nl;
+  }
+  else if (x == 1&&k>=3)
+  {
+    if (n == 3)
+      cout << "yes\n"<< 1 nl << 3 nl;
+    else
+    {
+      cout << "yes\n";
+      ll sum = n - 3;
+      cout << (sum / 2) + 1 nl;
+      loop(sum / 2) cout << 2 << " ";
+      cout << 3 nl;
     }
-    
-    for(int i=0; i<m; i++){
-        cin>>a[i];
-        if(i) ad[i-1] = a[i] - a[i-1];
-    }
-    for(int i=0; i<n; i++){
-        cin>>b[i];
-        if(i) bd[i-1] = b[i] - b[i-1];
-    }
+  }
+  else cout<<"no\n";
 
-    cout<<countOccurrences(bd,ad)<<nl;
+  return 0;
 }
 
-//====================
 int main()
 {
-#ifndef ONLINE_JUDGE
-    freopen("/input.txt", "r", stdin);
-#endif
-#ifdef ONLINE_JUDGE
-    cin.tie(0)->sync_with_stdio(0);
-#endif
+  alpha  
 
-    ll t = 1;
-    // cin >> t;
-    while (t--)
-        run();
+    test{
+      solve();
+    }
 }

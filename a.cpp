@@ -11,55 +11,9 @@
 using namespace std;
 //====================
 
-const int N = 1e5+4;
-int n, m, par[N], cnt[N];
-
-void init(int n){
-    iota(par, par + n, 0);
-    fill(cnt, cnt + n, 1);
-}
-int findParent(int u){
-    if(u == par[u]) return u;
-    return par[u] = findParent(par[u]);
-}
-bool join(int u, int v){
-    u = findParent(u),v = findParent(v);
-    if(u != v){
-        if(cnt[u] > cnt[v])
-            swap(u, v);
-        par[u] = v;
-        cnt[v] += cnt[u];
-		return 1;
-    }else return 0;
-}
 
 void run()
 {
-	ll n; 
-	cin>>n;
-	vector<pair<ll,ll>> cls;
-	init(n+1);
-
-	for(int i=0; i<n-1; i++){
-		ll u,v;
-		cin>>u>>v;
-		if(!join(u,v)){
-			cls.pb({u,v});
-		}
-	}
-	set<ll> st;
-	for(int i=1; i<=n; i++){
-		st.insert(findParent(i));
-	}
-	cout<<cls.size()<<nl;
-	int i=0;
-	bool f=0;
-	for(auto nd:st){
-		if(!f){ f=1;continue;}
-		cout<<cls[i].fs<<' '<<cls[i].sc<<' ';
-		cout<<*st.begin()<<' '<<nd<<nl;
-		i++;
-	}
 
 
 }
@@ -75,7 +29,7 @@ int main()
 #endif
 
 	ll t = 1;
-	// cin >> t;
+	cin >> t;
 	while (t--)
 		run();
 }
