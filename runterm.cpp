@@ -1,2 +1,1 @@
-					db((char)u+'a');
-					db((char)v+'a');
+		if (inDegree[u] == 0)
