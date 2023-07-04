@@ -8,23 +8,23 @@
 #define db(x) cout<<#x<<": "<<x<<nl
 using namespace std;
 //============================
-// DP to count problem
-// Using iterative approach
-ll mod = 1e9+7;
-
 void run(){
 	ll n,x; 
 	cin>>n>>x;
 	ll cns[n];
 	for(int i=0; i<n; i++) 
 		cin>>cns[i];
-	ll dp[x+1]={};
-	dp[0] = 1;
+	ll dp[x+1];
+	memset(dp ,-1, sizeof dp);
+	dp[0] = 0;
+	
 	for(int i=0; i<=x;i++){
-		if(dp[i]){
+		if(~dp[i]){
 			for(int j=0; j<n; j++){
-				if(i+cns[j]<=x)
-					dp[i+cns[j]] += dp[i] ,dp[i+cns[j]]%=mod;
+				if(i+cns[j]<=x){
+					if(dp[i+cns[j]]==-1) dp[i+cns[j]] = INT_MAX;
+					dp[i+cns[j]] = min(dp[i]+1,dp[i+cns[j]]);
+				}
 			}
 		}
 	}

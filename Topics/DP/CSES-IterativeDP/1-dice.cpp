@@ -8,28 +8,18 @@
 #define db(x) cout<<#x<<": "<<x<<nl
 using namespace std;
 //============================
-// DP to count problem
-// Using iterative approach
-ll mod = 1e9+7;
-
+ll mod=1e9+7;
 void run(){
-	ll n,x; 
-	cin>>n>>x;
-	ll cns[n];
-	for(int i=0; i<n; i++) 
-		cin>>cns[i];
-	ll dp[x+1]={};
+	ll n; cin>>n;
+	ll dp[n+1]={};
 	dp[0] = 1;
-	for(int i=0; i<=x;i++){
-		if(dp[i]){
-			for(int j=0; j<n; j++){
-				if(i+cns[j]<=x)
-					dp[i+cns[j]] += dp[i] ,dp[i+cns[j]]%=mod;
-			}
+
+	for(int i=0; i<n;i++){
+		for(int j=1; j<=6;j++){
+			if(i+j<=n) dp[i+j] +=dp[i] , dp[i+j]%=mod; 
 		}
 	}
-
-	cout<<dp[x]<<nl;
+	cout<<dp[n]<<nl;
 }
 //============================
 int main()
