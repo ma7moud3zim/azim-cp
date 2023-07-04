@@ -5,66 +5,45 @@
 #define fs first
 #define sc second
 #define pb push_back
-#define db(x) cout << #x << ": " << x << nl
+#define db(x) cout<<#x<<": "<<x<<nl
 using namespace std;
 //============================
-vector<vector<ll>> gr;
-vector<ll> in;
-ll n;
-bool isCyclic(){
-	queue<int> q;
-	int vis = 0;
-	for (int u = 0; u < n; u++)
-		if (!in[u]){
-			q.push(u);
-		}
-		
-	while (q.size())
-	{
-		int u = q.front();
-		q.pop();
-		vis++;
-		for (auto v : gr[u]){
-			in[v]--;
-			if (!in[v]){
-				q.push(v);
+// DP to count problem
+// Using iterative approach
+ll mod = 1e9+7;
+
+void run(){
+	ll n,x; 
+	cin>>n>>x;
+	ll cns[n];
+	for(int i=0; i<n; i++) 
+		cin>>cns[i];
+	ll dp[x+1]={};
+	dp[0] = 1;
+	for(int i=0; i<=x;i++){
+		if(dp[i]){
+			for(int j=0; j<n; j++){
+				if(i+cns[j]<=x)
+					dp[i+cns[j]] += dp[i] ,dp[i+cns[j]]%=mod;
 			}
 		}
 	}
 
-	return vis != n;
+	cout<<dp[x]<<nl;
 }
-
-void run(){
-	ll n;
-	cin>>n;
-	ll a[n];
-	for(int i=0; i<n; i++){
-		cin>>a[i];
-	}
-	string s;
-	cin>>s;
-	vector<pill> m,e,x;
-
-	for(int i=0; i<n;i++){
-		if(s[i] == 'M') m.pb({i,a[i]});
-		if(s[i] == 'E') e.pb({i,a[i]});
-		if(s[i] == 'X') x.pb({i,a[i]});
-	}
-	fo
-
-
-
-}
-
 //============================
 int main()
 {
+#ifndef ONLINE_JUDGE
+	freopen("/input.txt", "r", stdin);
+#endif
+#ifdef ONLINE_JUDGE
 	cin.tie(0)->sync_with_stdio(0);
-	ll t = 1;
+#endif
+	
+	ll t=1;
 	// cin>>t;
-	while (t--)
-	{
+	while(t--){
 		run();
 	}
 }
