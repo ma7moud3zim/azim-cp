@@ -7,16 +7,14 @@
 #define fs first
 #define sc second
 #define pb push_back
-#define db(x) cout << #x << ": \"" << x << '\"' << nl
+#define db(x) cout<<#x<<": "<<x<<nl
 using namespace std;
-//====================
+//============================
 
-void run()
-{
+void run(){
 
 }
-
-//====================
+//============================
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -25,9 +23,9 @@ int main()
 #ifdef ONLINE_JUDGE
     cin.tie(0)->sync_with_stdio(0);
 #endif
-
-    ll t = 1;
-    cin >> t;
-    while (t--)
+    ll t=1;
+    cin>>t;
+    while(t--){
         run();
+    }
 }
