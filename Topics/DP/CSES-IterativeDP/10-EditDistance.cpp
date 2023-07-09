@@ -10,35 +10,31 @@
 #define db(x) cout<<#x<<": "<<x<<nl
 using namespace std;
 //============================
-const ll N = 1e6+7; 
-const int mod = 1e9+7;
-ll A[N],B[N];
+
+
 
 void run(){
-	A[1]=1,B[1]=1;
-	for(int i=2;i<N; i++){
-		A[i] = ((4*A[i-1])%mod+B[i-1])%mod;
-		B[i] = (A[i-1] + 2*B[i-1]%mod)%mod;
-	}	
+	string a,b;
+	cin>>a>>b;
+	ll n =a.size();
+	ll m = b.size();
+	ll dp[n+1][m+1]={};
+	for(int i=0; i<=n; i++)
+		dp[i][0] = i;
+	for(int i=0; i<=m; i++)
+		dp[0][i] = i;
+
+	for(int i=1; i<=n;i++){
+		for(int j=1; j<=m; j++){
+			if(a[i-1]==b[j-1]){
+				dp[i][j] = dp[i-1][j-1];
+			}else{
+				dp[i][j] =1+min({dp[i-1][j],dp[i][j-1],dp[i-1][j-1]});
+			}
+		}
+	}
+	cout<<dp[n][m]<<nl;
 }
-
-/*
-
-In Type A:
-valid valid	 not   not  
- _ _   _ _   _ _   _ _
-|_|_| |_ _|	|_| | | |_|  
-|_ _| |_ _| |_ _| |_ _| 
-
-
-In Type B:
-valid valid valid valid
- _ _   _ _   _ _   _ _
-|_|_| |_ _|	|_| | | |_|  
-|_|_| |_|_| |_|_| |_|_| 
-
-*/
-
 //============================
 int main()
 {
@@ -49,11 +45,8 @@ int main()
 	cin.tie(0)->sync_with_stdio(0);
 #endif
 	ll t=1;
-	cin>>t;
-	run();
+	// cin>>t;
 	while(t--){
-		ll n;
-		cin>>n;
-		cout<<A[n]+B[n]<<nl;
+		run();
 	}
 }

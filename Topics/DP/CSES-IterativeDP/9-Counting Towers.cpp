@@ -16,9 +16,14 @@ ll A[N],B[N];
 
 void run(){
 	A[1]=1,B[1]=1;
+	/*
+		A |_ _|
+		B |_|_|
+	*/
+
 	for(int i=2;i<N; i++){
-		A[i] = ((4*A[i-1])%mod+B[i-1])%mod;
-		B[i] = (A[i-1] + 2*B[i-1]%mod)%mod;
+		A[i] = ((2*A[i-1])%mod+B[i-1])%mod;
+		B[i] = (A[i-1] + (4*B[i-1])%mod)%mod;
 	}	
 }
 
@@ -54,6 +59,6 @@ int main()
 	while(t--){
 		ll n;
 		cin>>n;
-		cout<<A[n]+B[n]<<nl;
+		cout<<(A[n]+B[n])%mod<<nl;
 	}
 }
